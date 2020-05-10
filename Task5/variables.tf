@@ -6,3 +6,4 @@ variable "region" {
 variable "shared_credentials_file" {
   description = "Credentials files to use for authentication"
 }
+variable "vpc_id" {}
