@@ -25,10 +25,6 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-data "aws_vpc" "selected" {
-  id = "${var.vpc_id}"
-}
-
 resource "aws_instance" "UdacityT2" {
     count = 4
     ami = data.aws_ami.amazon_linux.id
