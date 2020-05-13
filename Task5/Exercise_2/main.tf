@@ -1,3 +1,15 @@
+provider "aws" {
+    region = var.region
+    shared_credentials_file = var.shared_credentials_file
+    version = "~> 2.61"
+}
+
+data "archive_file" "lambda" {
+  type        = "zip"
+  output_path = "lambda.zip"
+  source_file = "greet_lambda.py"
+}
+
 resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
 
@@ -18,22 +30,51 @@ resource "aws_iam_role" "iam_for_lambda" {
 EOF
 }
 
-resource "aws_lambda_function" "test_lambda" {
-  filename      = "greet_lambda.py"
-  function_name = "lambda_function_name"
-  role          = "${aws_iam_role.iam_for_lambda.arn}"
-  handler       = "exports.test"
+resource "aws_cloudwatch_log_group" "lambda_logs" {
+  name              = "/aws/lambda/${var.lambda_function_name}"
+  retention_in_days = 14
+}
 
-  # The filebase64sha256() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the base64sha256() function and the file() function:
-  # source_code_hash = "${base64sha256(file("greet_lambda.py"))}"
-  source_code_hash = "${filebase64sha256("greet_lambda.py")}"
+resource "aws_iam_policy" "lambda_logging" {
+  name        = "lambda_logging"
+  path        = "/"
+  description = "IAM policy for logging from a lambda"
 
-  runtime = "nodejs12.x"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*",
+      "Effect": "Allow"
+    }
+  ]
+}
+EOF
+}
 
+resource "aws_iam_role_policy_attachment" "lambda_logs" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = aws_iam_policy.lambda_logging.arn
+}
+
+resource "aws_lambda_function" "greet_lambda" {
+  filename         = "lambda.zip"
+  function_name    = var.lambda_function_name
+  role             = aws_iam_role.iam_for_lambda.arn
+  handler          = "lambda_handler"
+  source_code_hash = "${filebase64sha256("lambda.zip")}"
+  depends_on       = [aws_iam_role_policy_attachment.lambda_logs, aws_cloudwatch_log_group.lambda_logs]
+
+  runtime = var.runtime
   environment {
     variables = {
-      foo = "bar"
+      greeting = "Hello, World!"
     }
   }
 }
