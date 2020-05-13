@@ -8,5 +8,9 @@ variable "runtime" {
 }
 
 variable "lambda_function_name" {
-  default = ""
+  default = "greet_lambda"
+}
+
+variable "shared_credentials_file" {
+  description = "Credentials files to use for authentication"
 }

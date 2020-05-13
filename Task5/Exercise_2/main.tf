@@ -4,7 +4,7 @@ provider "aws" {
     version = "~> 2.61"
 }
 
-data "archive_file" "lambda" {
+data "archive_file" "lambda_zip" {
   type        = "zip"
   output_path = "lambda.zip"
   source_file = "greet_lambda.py"
@@ -67,8 +67,8 @@ resource "aws_lambda_function" "greet_lambda" {
   filename         = "lambda.zip"
   function_name    = var.lambda_function_name
   role             = aws_iam_role.iam_for_lambda.arn
-  handler          = "lambda_handler"
-  source_code_hash = "${filebase64sha256("lambda.zip")}"
+  handler          = "greet_lambda.lambda_handler"
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   depends_on       = [aws_iam_role_policy_attachment.lambda_logs, aws_cloudwatch_log_group.lambda_logs]
 
   runtime = var.runtime
