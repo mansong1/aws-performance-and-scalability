@@ -1,0 +1,16 @@
+﻿Service,Number,Monthly Cost
+Application Servers,4,1434.36
+Web Servers,4,959.36
+Application Load Balancer,1,1040.43
+Network Load Balancer,1,453.81
+S3 bucket,1,74.42
+Elastic IP,1,158.40
+Web Application Firewall ,1,26.00
+Route 53,1,5.00
+CloudWatch,1,361.35
+NAT Gateway,1,157.86
+Databases,2,12858.68
+Total Cost,,17529.67
+,,
+,,
+"Increase the specs of EC2 Instances, LoadBalancers, NAT, S3 and add CloudWatch",,
