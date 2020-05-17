@@ -1,13 +1,13 @@
-﻿Service,Number,Monthly Cost
-Application Servers,4,315.36
-Web Servers,4,295.36
-Application Load Balancer,1,308.43 
-Network Load Balancer,1,279.23 
-S3 bucket,1,39.61
-Elastic IP,1,92.60 
-Route 53,1,5
-NAT Gateway,1,361.35
-Databases,2,"3,711.45"
-Total Cost,,4728.13
+Service,Monthly,Configuration summary
+Amazon EC2,3736,"Operating system (Linux), Quantity (8), Storage for each EC2 instance (Provisioned IOPS SSD (io1)), Storage amount (2 TB), Provisioning IOPS (1000)"
+Amazon RDS for MySQL,1415.4,"Quantity (2), Storage for each RDS instance (General Purpose SSD (gp2)), Storage amount (30 GB), Instance type (db.r5.xlarge)"
+S3 Standard,117.76,S3 Standard storage (5 TB per month)
+Data Transfer,0," Inbound (from: All other regions) 0 TB per month 
+ Inbound (from: Internet) 0 TB per month 
+ Outbound (to: Amazon Cloud Front) 0 TB per month 
+"
+Amazon Route 53,365,Number of Elastic Network Interfaces (4)
+Elastic Load Balancing,31.03,Number of Application Load Balancers (1)
+Amazon Virtual Private Cloud (VPC),65.7,Number of NAT Gateways (1)
 ,,
-Primary change made is to reduce the size of the Database instances,,
+Total,5730.89,

@@ -1,16 +1,15 @@
-﻿Service,Number,Monthly Cost
-Application Servers,4,1434.36
-Web Servers,4,959.36
-Application Load Balancer,1,1040.43
-Network Load Balancer,1,453.81
-S3 bucket,1,74.42
-Elastic IP,1,158.40
-Web Application Firewall ,1,26.00
-Route 53,1,5.00
-CloudWatch,1,361.35
-NAT Gateway,1,157.86
-Databases,2,12858.68
-Total Cost,,17529.67
+Service,Monthly,Configuration summary
+Amazon EC2,3572.48,"Operating system (Linux), Quantity (8), Storage for each EC2 instance (Provisioned IOPS SSD (io1)), Storage amount (2 TB), Provisioning IOPS (1000), Instance type (m5a.xlarge)"
+Amazon RDS for MySQL,13407.68,"Quantity (2), Storage for each RDS instance (Provisioned IOPS SSD (io1)), Storage amount (2 TB), Provisioning IOPS (1000), Instance type (db.m5.12xlarge)"
+S3 Standard,117.76,S3 Standard storage (5 TB per month)
+Data Transfer,0," Inbound (from: All other regions) 0 TB per month 
+ Inbound (from: Internet) 0 TB per month 
+ Outbound (to: Amazon Cloud Front) 0 TB per month 
+"
+Amazon Route 53,365,Number of Elastic Network Interfaces (4)
+Elastic Load Balancing,2352.43,Number of Application Load Balancers (1)
+Amazon Virtual Private Cloud (VPC),65.7,Number of NAT Gateways (1)
+AWS Web Application Firewall (WAF),54.75,Number of Rules inside each Rule Group (5 per month)
+Amazon CloudWatch,33.029,
 ,,
-,,
-"Increase the specs of EC2 Instances, LoadBalancers, NAT, S3 and add CloudWatch",,
+Total,19968.829,
