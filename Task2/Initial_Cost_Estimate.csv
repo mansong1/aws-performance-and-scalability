@@ -1,11 +1,15 @@
-﻿Service,Number,Monthly Cost
-Application Servers,4,315.36
-Web Servers,4,295.36
-Application Load Balancer,1,308.43 
-Network Load Balancer,1,279.23 
-S3 bucket,1,39.61
-Elastic IP,1,92.60 
-Route 53,1,5
-NAT Gateway,1,361.35
-Databases,2,"7,689.31"
-Total Cost,,8705.99
+Group hierarchy,Region,Service,Upfront,Monthly,First 12 months total,Currency,Configuration summary
+My Estimate,US East (N. Virginia),Amazon EC2,0,3736,44832.00,USD,"Operating system (Linux), Quantity (8), Storage for each EC2 instance (Provisioned IOPS SSD (io1)), Storage amount (2 TB), Provisioning IOPS (1000)"
+My Estimate,US East (N. Virginia),Amazon RDS for MySQL,0,5620.2,67442.40,USD,"Quantity (2), Storage for each RDS instance (General Purpose SSD (gp2)), Storage amount (30 GB)"
+My Estimate,US East (N. Virginia),S3 Standard,0,117.76,1413.12,USD,S3 Standard storage (5 TB per month)
+My Estimate,US East (N. Virginia),Data Transfer,0,0,0.00,USD," Inbound (from: All other regions) 0 TB per month 
+ Inbound (from: Internet) 0 TB per month 
+ Outbound (to: Amazon Cloud Front) 0 TB per month 
+"
+My Estimate,US East (N. Virginia),Amazon Route 53,0,365,4380.00,USD,Number of Elastic Network Interfaces (4)
+My Estimate,US East (N. Virginia),Elastic Load Balancing,0,31.03,372.36,USD,Number of Application Load Balancers (1)
+My Estimate,US East (N. Virginia),Amazon Virtual Private Cloud (VPC),0,65.7,788.40,USD,Number of NAT Gateways (1)
+
+
+
+"AWS Pricing Calculator provides only an estimate of your AWS fees and doesn't include any taxes that might apply. Your actual fees depend on a variety of factors, including your actual usage of AWS services."
